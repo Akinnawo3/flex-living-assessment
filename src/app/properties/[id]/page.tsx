@@ -223,7 +223,9 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
 
   try {
     // Fetch ONLY approved reviews for this property from server
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+    // lib/config.ts
+    const baseUrl = process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_API_URL_LIVE : process.env.NEXT_PUBLIC_API_URL;
+
     const response = await fetch(`${baseUrl}/api/reviews/hostaway?listingId=${id}&onlyApproved=true`, {
       cache: "no-store", // Don't cache, get fresh data
       next: { revalidate: 0 }, // Always revalidate

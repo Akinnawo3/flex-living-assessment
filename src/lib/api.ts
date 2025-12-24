@@ -1,4 +1,5 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+// lib/config.ts
+const API_BASE_URL = process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_API_URL_LIVE : process.env.NEXT_PUBLIC_API_URL;
 
 export interface FetchReviewsParams {
   listingId?: string;
