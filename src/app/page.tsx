@@ -19,10 +19,9 @@ export default function HomePage() {
       description: "Spot trends and recurring issues with sentiment analysis and category ratings.",
     },
   ];
-
   const properties = [
     {
-      id: "2B N1 A",
+      id: "2b-n1-a", // Updated
       name: "29 Shoreditch Heights",
       location: "Shoreditch, London",
       rating: 4.8,
@@ -30,7 +29,7 @@ export default function HomePage() {
       image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&auto=format&fit=crop",
     },
     {
-      id: "Studio 3C",
+      id: "studio-3c", // Updated
       name: "Downtown Loft",
       location: "Manchester City Center",
       rating: 4.5,
@@ -38,7 +37,7 @@ export default function HomePage() {
       image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&auto=format&fit=crop",
     },
     {
-      id: "3B N2 B",
+      id: "3b-n2-b", // Updated
       name: "Lakeside Villa",
       location: "Lake District",
       rating: 4.9,
@@ -64,7 +63,7 @@ export default function HomePage() {
                 Go to Dashboard
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
-              <Link href="/properties/2B N1 A" className="bg-transparent border-2 border-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 flex items-center justify-center">
+              <Link href="/properties/2b-n1-a" className="bg-transparent border-2 border-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 flex items-center justify-center">
                 View Example Property
               </Link>
             </div>
