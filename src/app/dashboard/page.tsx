@@ -194,24 +194,19 @@ export default function DashboardPage() {
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">Reviews Dashboard</h1>
-              <p className="text-gray-600 mt-1">Manage and monitor guest reviews across all properties</p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+          {/* Title and button in separate rows on mobile */}
+          <div className="flex flex-col space-y-4 sm:flex-row sm:justify-between sm:items-center sm:space-y-0">
+            <div className="flex-1">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Reviews Dashboard</h1>
+              <p className="text-sm sm:text-base text-gray-600 mt-1">Manage and monitor guest reviews across all properties</p>
             </div>
-            <div className="flex items-center space-x-4">
-              {/* <button onClick={() => fetchReviews(false)} disabled={isRefreshing} className="flex items-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 disabled:opacity-50 transition-colors">
-                <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? "animate-spin" : ""}`} />
-                {isRefreshing ? "Refreshing..." : "Refresh"}
-              </button> */}
-              <button onClick={handleExportCSV} className="flex items-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+
+            <div className="flex-shrink-0">
+              <button onClick={handleExportCSV} className="w-full sm:w-auto flex items-center justify-center px-4 py-2.5 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
                 <Download className="w-4 h-4 mr-2" />
                 Export CSV
               </button>
-              {/* <button onClick={handlePublishSelected} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                Publish Selected
-              </button> */}
             </div>
           </div>
         </div>
@@ -251,17 +246,33 @@ export default function DashboardPage() {
 
         {/* Reviews Table */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: 0.2 }} className="bg-white rounded-xl shadow overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <div className="flex justify-between items-center">
-              <div>
+          <div className="px-4 sm:px-6 py-4 border-b border-gray-200">
+            {/* Stack on mobile, row on larger screens */}
+            <div className="flex flex-col space-y-4 sm:flex-row sm:justify-between sm:items-center sm:space-y-0">
+              {/* Title and stats section */}
+              <div className="flex-1">
                 <h2 className="text-lg font-semibold text-gray-900">All Reviews</h2>
-                <p className="text-sm text-gray-600">
-                  {filteredReviews.length} reviews found •<span className="text-green-600 ml-2 font-medium">{filteredReviews.filter((r) => r.isApproved).length} published</span>
-                  <span className="text-gray-400 mx-2">•</span>
-                  <span className="text-gray-600">{filteredReviews.filter((r) => !r.isApproved).length} hidden</span>
-                </p>
+                <div className="mt-1">
+                  {/* Stats - stacked on mobile, inline on larger screens */}
+                  <div className="flex flex-wrap items-center gap-1 sm:gap-0">
+                    <span className="text-sm text-gray-600">{filteredReviews.length} reviews found</span>
+                    <span className=" sm:inline mx-2 text-gray-400">•</span>
+                    <span className="text-sm text-green-600 font-medium">{filteredReviews.filter((r) => r.isApproved).length} published</span>
+                    <span className=" sm:inline mx-2 text-gray-400">•</span>
+                    <span className="text-sm text-gray-600">{filteredReviews.filter((r) => !r.isApproved).length} hidden</span>
+                  </div>
+
+                  {/* Mobile-only stats layout */}
+                  {/* <div className="sm:hidden flex items-center space-x-3 mt-1">
+                    <span className="text-sm text-green-600 font-medium">{filteredReviews.filter((r) => r.isApproved).length} published</span>
+                    <span className="text-gray-400">•</span>
+                    <span className="text-sm text-gray-600">{filteredReviews.filter((r) => !r.isApproved).length} hidden</span>
+                  </div> */}
+                </div>
               </div>
-              <div className="flex items-center space-x-4">
+
+              {/* Search input - full width on mobile */}
+              <div className="w-full sm:w-auto">
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                   <input
@@ -269,7 +280,7 @@ export default function DashboardPage() {
                     placeholder="Search reviews..."
                     value={filters.search}
                     onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-                    className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    className="w-full sm:w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                   />
                 </div>
               </div>
