@@ -1,3 +1,16 @@
+// Add this helper function at the top
+export function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w\-]+/g, "")
+    .replace(/\-\-+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
+}
+
+// Update normalizeReviews function to generate slug
+
 export interface ReviewCategory {
   category: string;
   rating: number;
@@ -223,8 +236,9 @@ export function normalizeReviews(rawReviews: RawReview[]): NormalizedReview[] {
     const categoryRatings = review.reviewCategory.map((cat) => cat.rating);
     const overallRating = categoryRatings.length > 0 ? categoryRatings.reduce((sum, rating) => sum + rating, 0) / categoryRatings.length : review.rating || 0;
 
-    // Extract listing ID
-    const listingId = review.listingName.split(" - ")[0] || review.listingName;
+    // Extract listing ID and create slug
+    const listingIdRaw = review.listingName.split(" - ")[0] || review.listingName;
+    const listingId = slugify(listingIdRaw);
 
     // Determine sentiment
     let sentiment: "positive" | "neutral" | "negative" = "neutral";
